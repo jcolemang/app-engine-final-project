@@ -1,0 +1,18 @@
+
+$footer-height: 40px;
+$text-size: 25px;
+
+#footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: $footer-height;
+    line-height: $footer-height;
+    text-align: right;
+    font-size: $text-size;
+}
+
+.footer-text {
+    margin-right: 50px;
+}

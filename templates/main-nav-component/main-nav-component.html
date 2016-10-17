@@ -1,0 +1,19 @@
+
+{% set nav_links = [
+  ('Home', '/'),
+  ('Calendar Template', '/calendar'),
+] %}
+
+<div class="navbar navbar-default">
+
+    {% for name, link in nav_links %}
+      <ul class="nav navbar-nav">
+        <li class="{% if path == link  %}active{% endif %}">
+          <a href="{{ link }}">
+            {{ name }}
+          </a>
+        </li>
+      </ul>
+    {% endfor %}
+
+</div>
