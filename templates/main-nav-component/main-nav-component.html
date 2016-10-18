@@ -4,16 +4,16 @@
   ('Calendar Template', '/calendar'),
 ] %}
 
-<div class="navbar navbar-default">
+<div class="navbar">
 
+  <ul class="nav navbar-nav">
     {% for name, link in nav_links %}
-      <ul class="nav navbar-nav">
-        <li class="{% if path == link  %}active{% endif %}">
-          <a href="{{ link }}">
-            {{ name }}
-          </a>
-        </li>
-      </ul>
-    {% endfor %}
+      <li class="{% if path == link  %}active{% else %}default{% endif %}">
+        <a href="{{ link }}">
+          {{ name }}
+        </a>
+      </li>
+      {% endfor %}
+  </ul>
 
 </div>

@@ -3,54 +3,28 @@
 // http://stackoverflow.com/questions/18529274/change-navbar-color-in-twitter-bootstrap-3
 
 
-$main-color: rgb(128, 0, 0);
-$active-background-color: rgb(200, 0, 0);
+$default-background-color: rgb(150, 0, 0);
+$active-background-color: rgb(128, 0, 0);
+$active-text-color: white;
 $text-color: white;
 
+.navbar {
 
-.navbar-default {
+    background-color: $default-background-color;
 
-    background-color: blue;
-    // border-color: ;
-
-    > a {
-        color: $text-color;
-
-        &:hover {
-            color: $text-color;
+    .nav.navbar-nav {
+        .active {
+            a, a:hover, a:focus {
+                color: $active-text-color;
+                background-color: $active-background-color;
+            }
         }
 
-    } // end a
-
-    .navbar-brand {
-
-    } // end navbar-brand
-
-    .navbar-nav {
-
-        background-color: $main-color;
-
-        .active {
-
-
-            > a, a:focus, a:hover {
-                color: silver; // color of active link text
-            } // end a
-
-        } // end active
-
-        > li {
-
-            //background-color: $active-background-color;
-
-            > a, a:hover, a:focus {
-
-                color: white; // default color
-
-            } // end a
-
-        } // end li
-
-    } // end navbar-nav
-
-} // end navbar-default
+        .default {
+            a, a:hover, a:focus {
+                color: $text-color;
+                background-color: $default-background-color;
+            }
+        }
+    }
+}
