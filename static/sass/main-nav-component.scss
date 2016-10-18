@@ -7,6 +7,13 @@ $default-background-color: rgb(150, 0, 0);
 $active-background-color: rgb(128, 0, 0);
 $active-text-color: white;
 $text-color: white;
+$icon-bar-color: white;
+
+.navbar-header {
+    .icon-bar {
+        background-color: white;
+    }
+}
 
 .navbar {
 
