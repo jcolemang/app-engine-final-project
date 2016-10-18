@@ -6,7 +6,10 @@
 
 <div class="navbar">
 
-  <ul class="nav navbar-nav">
+  <img src="/static/images/Rose-R.png"
+       class="navbar-brand">
+
+  <ul class="nav navbar-nav navbar-left">
     {% for name, link in nav_links %}
       <li class="{% if path == link  %}active{% else %}default{% endif %}">
         <a href="{{ link }}">
