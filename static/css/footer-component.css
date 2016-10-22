@@ -1,0 +1,14 @@
+#footer {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  text-align: right;
+  font-size: 25px; }
+
+.footer-text {
+  margin-right: 50px; }
+
+/*# sourceMappingURL=footer-component.css.map */

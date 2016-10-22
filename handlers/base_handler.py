@@ -1,8 +1,13 @@
 
-from webapp2 import RequestHandler
 import os
-from jinja2 import Environment, FileSystemLoader
+
 from google.appengine.api import users
+from jinja2 import Environment, FileSystemLoader
+from webapp2 import RequestHandler
+
+from models import User
+import utils
+
 
 class BaseHandler(RequestHandler):
 
@@ -19,10 +24,12 @@ class BaseHandler(RequestHandler):
 
 
     def post(self):
-        user = users.get_current_user()
-        if not user:
+        user_email = users.get_current_user().email().lower()
+        if not user_email:
             raise Exception('User not logged in')
-        self.handle_post(user)
+          
+        curr_user = utils.get_curr_user_from_email(user_email)
+        self.handle_post(curr_user)
 
 
     def handle_post(self, user):
