@@ -11,8 +11,10 @@ handlers:
 - url: /static
   static_dir: static
 
+
 - url: /vendor
   static_dir: static/vendor
+
 
 - url: /robots.txt
   static_files: robots.txt
@@ -20,6 +22,7 @@ handlers:
 
 - url: .*
   script: main.app
+  login: required
 
 libraries:
 - name: webapp2

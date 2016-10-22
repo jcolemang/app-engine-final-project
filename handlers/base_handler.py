@@ -2,6 +2,7 @@
 from webapp2 import RequestHandler
 import os
 from jinja2 import Environment, FileSystemLoader
+from google.appengine.api import users
 
 class BaseHandler(RequestHandler):
 
@@ -15,6 +16,17 @@ class BaseHandler(RequestHandler):
         values = self.get_base_values()
         self.add_values(values)
         self.response.write(template.render(values))
+
+
+    def post(self):
+        user = users.get_current_user()
+        if not user:
+            raise Exception('User not logged in')
+        self.handle_post(user)
+
+
+    def handle_post(self, user):
+        raise Exception('Must override handle_post')
 
 
     def get_template_by_name(self, template_name):
