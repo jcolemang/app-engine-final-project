@@ -3,7 +3,7 @@ from google.appengine.ext import ndb
 
 class Calendar(ndb.Model):
   owner = ndb.KeyProperty()
-  header = ndb.StringProperty()
+  name = ndb.StringProperty()
   date_created = ndb.DateProperty()
 
 class User(ndb.Model):

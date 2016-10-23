@@ -1,5 +1,6 @@
 
 from base_handler import BaseHandler
+import utils
 
 from google.appengine.api import users
 
@@ -13,8 +14,15 @@ class DashboardPageHandler(BaseHandler):
 
     def add_values(self, values):
         curr_user = users.get_current_user()
-        values['email'] = curr_user.email().lower()
+        email = curr_user.email().lower()
+        values['email'] = email
+        values['calendar_query'] = utils.query_user_calendars(email)
 
     def handle_post(self, user):
-        print '\n', user.email, '\n'
+        auth_user = users.get_current_user()
+        email = auth_user.email().lower()
+
+        calendar_name = self.request.get('calendar-name')
+        calendar = utils.put_calendar_for_user(email, calendar_name)
+
         self.redirect('/')
