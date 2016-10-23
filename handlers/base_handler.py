@@ -26,21 +26,18 @@ class BaseHandler(RequestHandler):
 
     def get(self):
         auth_user = self.get_auth_user()
-
-        if not utils.user_exists(auth_user.email().lower()):
-            self.redirect('/create-user')
-            return
-
+        email = auth_user.email().lower()
+        user = utils.get_curr_user_from_email(email)
+        if not user:
+            user = utils.create_user(email)
         template = self.get_template()
-        values = self.get_base_values(auth_user.email())
+        values = self.get_base_values(auth_user, user)
         self.add_values(values)
         self.response.write(template.render(values))
 
 
     def post(self):
         auth_user = self.get_auth_user()
-        if not auth_user:
-            raise Exception('User not logged in')
         user_email = auth_user.email().lower()
         curr_user = utils.get_curr_user_from_email(user_email)
         self.handle_post(curr_user)
@@ -58,11 +55,12 @@ class BaseHandler(RequestHandler):
         raise RuntimeError('Must override get_template')
 
 
-    def get_base_values(self, email):
-        auth_user = users.get_current_user()
+    def get_base_values(self, auth_user, user):
         return {
             'path': self.request.path,
-            'user': utils.get_curr_user_from_email(email),
+            'user': user,
+            'username': user.username,
+            'email': user.email,
             'logout_url': users.create_logout_url(auth_user)
         }
 

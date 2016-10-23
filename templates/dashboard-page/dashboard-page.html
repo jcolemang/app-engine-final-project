@@ -11,10 +11,13 @@
 {% block content %}
   <h1>Here is the dashboard!</h1>
   <h2>Here is your email: {{ email }}</h2>
+  <h2>Here is your username: {{ username }}</h2>
 
-  <h1>Here they are</h1>
+  <h1>Here are your calendars</h1>
   {% for calendar in calendar_query %}
-    <a href="/calendar/{{calendar.name}}">{{ calendar.name }}</a>
+    <div>
+      <a href="/calendar/{{username}}/{{calendar.name}}">{{ calendar.name }}</a>
+    </div>
   {% endfor %}
 
   <form method="post" target="#">

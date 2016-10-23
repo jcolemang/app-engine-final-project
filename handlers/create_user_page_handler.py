@@ -1,9 +1,9 @@
+from google.appengine.api import users
+from webapp2 import RequestHandler
 
 from base_handler import BaseHandler
 from models import User
-
-from google.appengine.api import users
-from webapp2 import RequestHandler
+import utils
 
 
 class CreateUserPageHandler(BaseHandler):
@@ -22,12 +22,7 @@ class CreateUserPageHandler(BaseHandler):
     def post(self):
         username = self.request.get('username-input')
         email = users.get_current_user().email().lower()
-
-        user = User(username=username,
-                    email=email,
-                    calendars_following=[])
-        user.put()
-
+        utils.create_user(email)
         self.redirect('/')
 
 
