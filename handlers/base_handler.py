@@ -61,7 +61,7 @@ class BaseHandler(RequestHandler):
             'user': user,
             'username': user.username,
             'email': user.email,
-            'logout_url': users.create_logout_url(auth_user)
+            'logout_url': users.create_logout_url('/')
         }
 
 
