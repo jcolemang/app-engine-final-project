@@ -1,7 +1,7 @@
 from google.appengine.ext import ndb
 import re
 
-from models import User, Calendar
+from models import User, Calendar, DoesNotExistError
 
 
 username_re = re.compile('(.*)@.*')
@@ -14,7 +14,8 @@ def get_parent_key_for_email(email):
 def put_calendar_for_user(email, calendar_name):
     user = get_curr_user_from_email(email)
     calendar = Calendar(parent=user.key,
-                        name=calendar_name)
+                        name=calendar_name,
+                        owner=user.key)
     calendar.put()
     return calendar
 
@@ -25,9 +26,32 @@ def query_user_calendars(email):
     return calendar_query
 
 
+def get_calendar(user, calendar_name):
+    cal_query = Calendar.query(ancestor=user.key)\
+                        .filter(ndb.AND(Calendar.owner==user.key,
+                                        Calendar.name==calendar_name))
+    calendars = cal_query.fetch()
+    if len(calendars) == 0:
+        raise DoesNotExistError('Calendar %s owned by %s does not exist',
+                                calendar_name,
+                                user.username)
+    if len(calendars) > 1:
+        raise Exception('This should never happen')
+    return calendars[0]
+
+
 def get_curr_user_from_email(email):
     email = email.lower()
     curr_user_query = User.query().filter(User.email==email)
+    curr_users = curr_user_query.fetch()
+    if len(curr_users) != 1:
+        return False
+    curr_user = curr_users[0]
+    return curr_user
+
+
+def get_curr_user_from_username(username):
+    curr_user_query = User.query().filter(User.username==username)
     curr_users = curr_user_query.fetch()
     if len(curr_users) != 1:
         return False

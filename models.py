@@ -1,10 +1,14 @@
 from google.appengine.ext import ndb
 
 
+class DoesNotExistError(Exception):
+  pass
+
 class Calendar(ndb.Model):
   owner = ndb.KeyProperty()
   name = ndb.StringProperty()
   date_created = ndb.DateProperty()
+
 
 class User(ndb.Model):
   username = ndb.StringProperty()
@@ -12,10 +16,12 @@ class User(ndb.Model):
   calendars_following = ndb.KeyProperty(kind=Calendar,
                                         repeated=True)
 
+
 class SpecialText(ndb.Model):
   text = ndb.StringProperty()
   date = ndb.DateProperty()
   tag = ndb.StringProperty()
+
 
 class Cell(ndb.Model):
   text = ndb.StringProperty(repeated=True)
