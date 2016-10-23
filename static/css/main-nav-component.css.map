@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAYI,wBAAU;EACN,gBAAgB,EAAE,KAAK;;AAI/B,OAAQ;EAEJ,gBAAgB,EAdO,OAAc;EAkB7B,mHAAoB;IAChB,KAAK,EAjBD,KAAK;IAkBT,gBAAgB,EAnBN,MAAc;EAwB5B,sHAAoB;IAChB,KAAK,EAvBR,KAAK;IAwBF,gBAAgB,EA3BL,OAAc",
-"sources": ["../sass/main-nav-component.scss"],
-"names": [],
-"file": "main-nav-component.css"
-}
