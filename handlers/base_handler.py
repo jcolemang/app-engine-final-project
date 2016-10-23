@@ -26,6 +26,11 @@ class BaseHandler(RequestHandler):
 
     def get(self):
         auth_user = self.get_auth_user()
+
+        if not utils.user_exists(auth_user.email().lower()):
+            self.redirect('/create-user')
+            return
+
         template = self.get_template()
         values = self.get_base_values(auth_user.email())
         self.add_values(values)
@@ -54,9 +59,11 @@ class BaseHandler(RequestHandler):
 
 
     def get_base_values(self, email):
+        auth_user = users.get_current_user()
         return {
             'path': self.request.path,
-            'user': utils.get_curr_user_from_email(email)
+            'user': utils.get_curr_user_from_email(email),
+            'logout_url': users.create_logout_url(auth_user)
         }
 
 

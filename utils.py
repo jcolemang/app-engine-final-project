@@ -27,11 +27,10 @@ def get_curr_user_from_email(email):
     curr_user_query = User.query().filter(User.email==email)
     curr_users = curr_user_query.fetch()
     if len(curr_users) != 1:
-        curr_user = User(parent=get_parent_key_for_email(email),
-                         email=email,
-                         username=email,
-                         calendars_following=[])
-        curr_user.put()
-    else:
-        curr_user = curr_users[0]
+        raise Exception('User not logged in')
+    curr_user = curr_users[0]
     return curr_user
+
+
+def user_exists(email):
+    return not not User.query().filter(User.email==email).fetch()

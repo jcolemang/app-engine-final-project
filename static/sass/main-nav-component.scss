@@ -19,7 +19,7 @@ $icon-bar-color: white;
 
     background-color: $default-background-color;
 
-    .nav.navbar-nav {
+    .nav {
         .active {
             a, a:hover, a:focus {
                 color: $active-text-color;

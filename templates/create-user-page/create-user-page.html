@@ -1,0 +1,36 @@
+
+{% extends 'base-page.html' %}
+
+{% block title %}
+  Welcome
+{% endblock %}
+
+
+{% block javascript %}
+
+{% endblock %}
+
+
+{% block css %}
+
+{% endblock %}
+
+
+{% block content %}
+
+    <h1>Welcome to Calendar Creator</h1>
+
+    <form method="post" target="#">
+
+      <div class="form-group">
+        <label for="username-input">Username</label>
+        <input type="text" id="username-input" name="username-input">
+      </div>
+
+      <button id="create-user-button" class="btn btn-default">
+        Create User
+      </button>
+
+    </form>
+
+{% endblock %}

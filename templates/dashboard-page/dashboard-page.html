@@ -14,8 +14,7 @@
 
   <h1>Here they are</h1>
   {% for calendar in calendar_query %}
-    <h2>Calendar</h2>
-    <h3>{{ calendar.name }}</h3>
+    <a href="/calendar/{{calendar.name}}">{{ calendar.name }}</a>
   {% endfor %}
 
   <form method="post" target="#">
