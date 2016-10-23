@@ -1,0 +1,7 @@
+.sass-cache/
+static/css/
+*.aux
+*.log
+*.pyc
+*.map
+*.pyc
