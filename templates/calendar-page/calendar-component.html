@@ -1,1 +1,15 @@
 
+
+<div class="center">
+  <table>
+    <tbody>
+      <tr>
+        {% for col_name in calendar.column_names %}
+          <td>
+            <span>{{ col_name }}</span>
+          </td>
+        {% endfor %}
+      </tr>
+    </tbody>
+  </table>
+</div>

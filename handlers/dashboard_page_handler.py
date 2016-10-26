@@ -22,6 +22,6 @@ class DashboardPageHandler(BaseHandler):
         email = auth_user.email().lower()
 
         calendar_name = self.request.get('calendar-name')
-        calendar = utils.put_calendar_for_user(email, calendar_name)
+        calendar = utils.create_default_calendar(user, calendar_name)
 
-        self.redirect('/')
+        self.redirect('/calendar/%s/%s' % (user.username, calendar_name))

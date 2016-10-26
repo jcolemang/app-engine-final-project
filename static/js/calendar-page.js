@@ -1,9 +1,5 @@
 
 (function () {
     // init
-    console.log('???');
-    $('#edit-cell-modal').modal();
-    console.log('???');
+    //$('#edit-cell-modal').modal();
 })();
-
-console.log('This is happening');

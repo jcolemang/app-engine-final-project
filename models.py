@@ -12,10 +12,8 @@ class SpecialText(ndb.Model):
 
 
 class Cell(ndb.Model):
-    text = ndb.StringProperty(repeated=True)
+    text = ndb.StringProperty()
     row_num = ndb.IntegerProperty()
-    # special_text = ndb.StructuredProperty(SpecialText,
-                                          # repeated=True)
 
 
 class Calendar(ndb.Model):

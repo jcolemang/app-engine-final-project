@@ -19,6 +19,7 @@
 
 
 {% block content %}
+  {% include 'calendar-page/edit-cell-modal.html' %}
 
   <div class="row text-center">
     <div class="col-xs-12 col-md-10 col-md-offset-1">
@@ -30,7 +31,10 @@
     Test Markdown
   </button>
 
-  {% include 'calendar-page/calendar-component.html' %}
-  {% include 'calendar-page/edit-cell-modal.html' %}
+  <div>
+    {% include 'calendar-page/calendar-component.html' %}
+  </div>
+
+
 
 {% endblock %}

@@ -1,9 +1,9 @@
 from google.appengine.ext import ndb
 import re
 
-from models import User, Calendar, DoesNotExistError
+from models import User, Calendar, Cell, DoesNotExistError
 
-
+# some constants
 username_re = re.compile('(.*)@.*')
 
 
@@ -24,12 +24,12 @@ def create_default_calendar(creator, name):
     calendar = Calendar(parent=creator.key,
                         owner=creator.key,
                         name=name)
+    calendar.column_names = Calendar.default_columns
+    calendar.put()
     for col in calendar.column_names:
         cell = Cell(row_num=0, text='hello!', parent=calendar.key)
         cell.put()
-    calendar.put()
     return calendar
-
 
 
 def query_user_calendars(email):
