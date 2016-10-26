@@ -2,28 +2,35 @@ from google.appengine.ext import ndb
 
 
 class DoesNotExistError(Exception):
-  pass
-
-class Calendar(ndb.Model):
-  owner = ndb.KeyProperty()
-  name = ndb.StringProperty()
-  date_created = ndb.DateProperty()
-
-
-class User(ndb.Model):
-  username = ndb.StringProperty()
-  email = ndb.StringProperty()
-  calendars_following = ndb.KeyProperty(kind=Calendar,
-                                        repeated=True)
+    pass
 
 
 class SpecialText(ndb.Model):
-  text = ndb.StringProperty()
-  date = ndb.DateProperty()
-  tag = ndb.StringProperty()
+    text = ndb.StringProperty()
+    date = ndb.DateProperty()
+    tag = ndb.StringProperty()
 
 
 class Cell(ndb.Model):
-  text = ndb.StringProperty(repeated=True)
-  special_text = ndb.StructuredProperty(SpecialText,
-                                       repeated=True)
+    text = ndb.StringProperty(repeated=True)
+    row_num = ndb.IntegerProperty()
+    # special_text = ndb.StructuredProperty(SpecialText,
+                                          # repeated=True)
+
+
+class Calendar(ndb.Model):
+
+    default_columns = ['session', 'content', 'due', 'preparation']
+
+    owner = ndb.KeyProperty()
+    name = ndb.StringProperty()
+    date_created = ndb.DateProperty(auto_now=True)
+    column_names = ndb.StringProperty(repeated=True)
+    cells = ndb.KeyProperty(kind=Cell, repeated=True)
+
+
+class User(ndb.Model):
+    username = ndb.StringProperty()
+    email = ndb.StringProperty()
+    calendars_following = ndb.KeyProperty(kind=Calendar,
+                                          repeated=True)
