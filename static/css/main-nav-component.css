@@ -1,0 +1,13 @@
+.navbar-header .icon-bar {
+  background-color: white; }
+
+.navbar {
+  background-color: #960000; }
+  .navbar .nav .active a, .navbar .nav .active a:hover, .navbar .nav .active a:focus {
+    color: white;
+    background-color: maroon; }
+  .navbar .nav .default a, .navbar .nav .default a:hover, .navbar .nav .default a:focus {
+    color: white;
+    background-color: #960000; }
+
+/*# sourceMappingURL=main-nav-component.css.map */
