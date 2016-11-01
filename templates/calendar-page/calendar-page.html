@@ -2,6 +2,8 @@
 {% extends 'base-page.html' %}
 
 {% block javascript %}
+  <script src="/vendor/js/Markdown.Converter.js"></script>
+  <script src="/vendor/js/Markdown.Sanitizer.js"></script>
   <script src="/static/js/markdown.js"></script>
   <script src="/static/js/calendar-page.js"></script>
   <script src="/static/js/edit-cell-modal.js"></script>
@@ -10,29 +12,39 @@
 
 {% block css %}
   <link rel="stylesheet" href="/static/css/calendar-page.css">
+  <link rel="stylesheet" href="/static/css/calendar-component.css">
 {% endblock %}
 
 
 {% block title %}
-  Calendar
+  {{ calendar.name }}
 {% endblock %}
 
 
 {% block content %}
+
+  <!-- Modals -->
   {% include 'calendar-page/edit-cell-modal.html' %}
 
+  <!-- The page header -->
   <div class="row text-center">
     <div class="col-xs-12 col-md-10 col-md-offset-1">
       <h1>{{ calendar.name }}</h1>
     </div>
   </div>
 
-  <button type="button" class="btn" data-toggle="modal" data-target="#edit-cell-modal">
+  <!-- test button -->
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edit-cell-modal">
     Test Markdown
   </button>
 
-  <div>
-    {% include 'calendar-page/calendar-component.html' %}
+  <!-- The calendar itself -->
+  <div id="calendar-component-div" class="row">
+    <div class="container-fluid">
+      <div class="col-md-6 col-md-offset-3">
+        {% include 'calendar-page/calendar-component.html' %}
+      </div>
+    </div>
   </div>
 
 

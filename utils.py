@@ -1,7 +1,7 @@
 from google.appengine.ext import ndb
 import re
 
-from models import User, Calendar, Cell, DoesNotExistError
+from models import User, Calendar, Cell, DoesNotExistError, CalendarRow, RepeatCalendarException
 
 # some constants
 username_re = re.compile('(.*)@.*')
@@ -20,16 +20,42 @@ def put_calendar_for_user(email, calendar_name):
     return calendar
 
 
-def create_default_calendar(creator, name):
-    calendar = Calendar(parent=creator.key,
-                        owner=creator.key,
+def create_default_calendar(current_user, name):
+    try:
+        get_calendar(current_user, name)
+        raise RepeatCalendarException('Calendar already exists')
+    except DoesNotExistError:
+        pass
+
+    # creating the actual calendar object
+    calendar = Calendar(parent=current_user.key,
+                        owner=current_user.key,
                         name=name)
     calendar.column_names = Calendar.default_columns
     calendar.put()
-    for col in calendar.column_names:
-        cell = Cell(row_num=0, text='hello!', parent=calendar.key)
-        cell.put()
+    append_calendar_row(calendar, current_user)
     return calendar
+
+
+def append_calendar_row(calendar, current_user, num_columns=None):
+    if not num_columns:
+        num_columns = len(calendar.column_names)
+
+    row = CalendarRow(parent=calendar.key)
+    row.put()
+
+    cell_keys = []
+    for i in range(num_columns):
+        cell = Cell(parent=row.key)
+        cell.put()
+        cell_keys.append(cell.key)
+
+    row.cell_keys = cell_keys
+    row.put()
+    print row.cell_keys
+
+    calendar.row_keys.append(row.key)
+    calendar.put()
 
 
 def query_user_calendars(email):

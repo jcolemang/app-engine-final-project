@@ -3,6 +3,8 @@ from google.appengine.ext import ndb
 
 class DoesNotExistError(Exception):
     pass
+class RepeatCalendarException(Exception):
+    pass
 
 
 class SpecialText(ndb.Model):
@@ -12,8 +14,11 @@ class SpecialText(ndb.Model):
 
 
 class Cell(ndb.Model):
-    text = ndb.StringProperty()
-    row_num = ndb.IntegerProperty()
+    text = ndb.StringProperty(default='')
+
+
+class CalendarRow(ndb.Model):
+    cell_keys = ndb.KeyProperty(kind=Cell, repeated=True)
 
 
 class Calendar(ndb.Model):
@@ -24,7 +29,7 @@ class Calendar(ndb.Model):
     name = ndb.StringProperty()
     date_created = ndb.DateProperty(auto_now=True)
     column_names = ndb.StringProperty(repeated=True)
-    cells = ndb.KeyProperty(kind=Cell, repeated=True)
+    row_keys = ndb.KeyProperty(kind=CalendarRow, repeated=True)
 
 
 class User(ndb.Model):
