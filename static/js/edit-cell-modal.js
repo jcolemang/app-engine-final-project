@@ -56,7 +56,9 @@
             error: function(jqXHR, textStatus, errorThrown) {
 
             },
-            complete: ecns.completeHandler
+            complete: function() {
+                ecns.completeHandler('#' + url_safe_key, newText);
+            }
         });
     };
 
