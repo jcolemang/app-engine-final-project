@@ -1,15 +1,33 @@
 
 
-<div class="center">
-  <table>
-    <tbody>
-      <tr>
+<div class="calendar-table-div">
+  <table class="calendar-table table table-bordered">
+
+    <!-- table column names -->
+    <thead>
+      <tr class="calendar-row">
         {% for col_name in calendar.column_names %}
-          <td>
+          <th class="calendar-data">
             <span>{{ col_name }}</span>
-          </td>
+          </th>
         {% endfor %}
       </tr>
+    </thead>
+
+    <!-- table cells -->
+    <tbody>
+
+      {% for row_key in calendar.row_keys %}
+        <tr>
+          {% for cell_key in row_key.get().cell_keys %}
+            <td id="{{cell_key}}" class="calendar-cell">
+              <h1>{{ cell_key.get().text }}</h1>
+            </td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+
     </tbody>
+
   </table>
 </div>
