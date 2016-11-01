@@ -16,18 +16,17 @@
 
     <!-- table cells -->
     <tbody>
-
       {% for row_key in calendar.row_keys %}
         <tr>
           {% for cell_key in row_key.get().cell_keys %}
-            <td id="{{cell_key}}" class="calendar-cell">
+            <td id="{{cell_key.urlsafe()}}" class="calendar-cell">
               <h1>{{ cell_key.get().text }}</h1>
             </td>
           {% endfor %}
         </tr>
       {% endfor %}
-
     </tbody>
 
   </table>
+
 </div>

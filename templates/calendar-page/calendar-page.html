@@ -5,8 +5,8 @@
   <script src="/vendor/js/Markdown.Converter.js"></script>
   <script src="/vendor/js/Markdown.Sanitizer.js"></script>
   <script src="/static/js/markdown.js"></script>
-  <script src="/static/js/calendar-page.js"></script>
   <script src="/static/js/edit-cell-modal.js"></script>
+  <script src="/static/js/calendar-page.js"></script>
 {% endblock %}
 
 
@@ -32,11 +32,6 @@
       <h1>{{ calendar.name }}</h1>
     </div>
   </div>
-
-  <!-- test button -->
-  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#edit-cell-modal">
-    Test Markdown
-  </button>
 
   <!-- The calendar itself -->
   <div id="calendar-component-div" class="row">

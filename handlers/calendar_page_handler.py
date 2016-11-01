@@ -1,4 +1,5 @@
 from google.appengine.api import users
+from google.appengine.ext import ndb
 
 from base_handler import BaseHandler
 import utils
@@ -18,6 +19,17 @@ class CalendarPageHandler(BaseHandler):
 
         template = self.get_template()
         self.response.write(template.render(values))
+
+
+    def put(self, username, calendar_name):
+        text = self.request.get('text')
+        url_safe_key = self.request.get('url_safe_key')
+        key = ndb.Key(urlsafe=url_safe_key)
+        cell = key.get()
+        cell.text = text
+        cell.put()
+        values = {'success': True}
+        self.response.write(values)
 
 
     def get_template(self):

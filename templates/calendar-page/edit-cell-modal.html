@@ -1,5 +1,6 @@
 
 <div id="edit-cell-modal" class="modal fade" role="dialog">
+  <input type="text" class="hidden" id="clicked-modal-key">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
@@ -31,8 +32,12 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" id="edit-modal-submit-button">
+          Save changes
+        </button>
       </div>
 
     </div><!-- modal-content -->
