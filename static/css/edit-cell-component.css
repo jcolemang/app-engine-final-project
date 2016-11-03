@@ -1,0 +1,12 @@
+#edit-cell-modal {
+  font-size: 0.25em; }
+
+#edit-cell-modal-dialog {
+  width: 60%; }
+
+#markdown-input {
+  width: 100%;
+  height: 400px;
+  resize: vertical; }
+
+/*# sourceMappingURL=edit-cell-component.css.map */
