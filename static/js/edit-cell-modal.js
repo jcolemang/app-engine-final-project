@@ -127,6 +127,8 @@
     $('#edit-modal-submit-button').click(function() {
         let urlSafeKey = ecns.getUrlSafeKey();
         let text = ecns.getText();
+        ecns.getCurrentCell().find('.hidden-markdown').html(text);
+        ecns.getCurrentCell().find('.hidden-markdown-edits').html(text);
         ecns.submitChanges(text, urlSafeKey);
     });
 

@@ -12,7 +12,7 @@
     let converter = md.converter;
 
     ecns.setCompleteHandler(function(id, newText) {
-        $(id).html(converter.makeHtml(newText));
+        $(id).find('.visible-text').html(converter.makeHtml(newText));
     });
 
     $('.calendar-cell').map(function() {
