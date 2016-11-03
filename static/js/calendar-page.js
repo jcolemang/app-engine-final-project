@@ -12,14 +12,14 @@
     let converter = md.converter;
 
     ecns.setCompleteHandler(function(id, newText) {
-        console.log(id);
-        console.log($(id));
         $(id).html(converter.makeHtml(newText));
     });
 
     $('.calendar-cell').map(function() {
-        console.log($(this).html());
-        $(this).html(converter.makeHtml($(this).html()));
+        let currCell = $(this);
+        let markdownText = currCell.find('.hidden-markdown').html();
+        let visibleHtml = converter.makeHtml(markdownText);
+        currCell.find('.visible-text').html(visibleHtml);
     });
 
 })(calendar_namespace);

@@ -19,7 +19,10 @@
       {% for row_key in calendar.row_keys %}
         <tr>
           {% for cell_key in row_key.get().cell_keys %}
-            <td id="{{cell_key.urlsafe()}}" class="calendar-cell">{{ cell_key.get().text }}</td>
+            <td id="{{cell_key.urlsafe()}}" class="calendar-cell">
+              <div class="hidden-markdown hidden">{{ cell_key.get().text }}</div>
+              <div class="visible-text"></div>
+            </td>
           {% endfor %}
         </tr>
       {% endfor %}

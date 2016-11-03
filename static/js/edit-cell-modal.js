@@ -30,8 +30,10 @@
         url_safe_key_input.val(key);
     };
 
-    ecns.openModal = function(cellKey) {
+    ecns.openModal = function(cellKey, markdownText) {
         ecns.setUrlSafeKey(cellKey);
+        let modal = $('#edit-cell-modal');
+        $('#markdown-input').val(markdownText);
         $('#edit-cell-modal').modal();
     };
 
@@ -68,7 +70,10 @@
     // open the modal when a key is pressed
     $('.calendar-cell').click(function() {
         let url_safe_key = $(this).attr('id');
-        ecns.openModal(url_safe_key);
+        let clickedCell = $(this);
+        let markdownText = clickedCell.find('.hidden-markdown').html();
+        ecns.openModal(url_safe_key, markdownText);
+        ecns.respondToInput();
     });
 
     // submit the data when the button is pressed
