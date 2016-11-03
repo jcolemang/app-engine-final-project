@@ -29,7 +29,7 @@ class DashboardPageHandler(BaseHandler):
 
         calendar_name = self.request.get('calendar-name')
         if not self.calendar_name_is_valid(calendar_name):
-            # TODO deal with this
+            self.redirect('/')
             return False
 
         calendar = utils.create_default_calendar(user, calendar_name)
