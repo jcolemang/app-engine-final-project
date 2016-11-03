@@ -9,29 +9,44 @@
 
     let converter = md.converter;
 
+
     ecns.setCurrentCell = function(currentCell) {
         ecns.currentCell = currentCell;
     };
+
 
     ecns.getCurrentCell = function() {
         return ecns.currentCell;
     };
 
+
     ecns.resetCurrentCell = function() {
         ecns.currentCell = undefined;
     };
+
 
     ecns.getText = function() {
         return $('#markdown-input').val();
     };
 
+
+    ecns.resetEdits = function() {
+        let oldMarkdown = ecns.getCurrentCell().find('.hidden-markdown').html();
+        ecns.getCurrentCell().find('.hidden-markdown-edits').html(oldMarkdown);
+        ecns.setText(oldMarkdown);
+        ecns.respondToInput();
+    };
+
+
     ecns.setText = function(text) {
         $('#markdown-input').val(text);
     };
 
+
     ecns.saveEdits = function(text) {
         ecns.getCurrentCell().find('.hidden-markdown-edits').html(text);
     };
+
 
     ecns.respondToInput = function() {
         let text = ecns.getText();
@@ -39,11 +54,13 @@
         $('#markdown-preview').html(converter.makeHtml(text));
     };
 
+
     ecns.getUrlSafeKey = function() {
         let modal = $('#edit-cell-modal');
         let url_safe_key_input = modal.find('#clicked-modal-key');
         return url_safe_key_input.val();
     };
+
 
     ecns.setUrlSafeKey = function(key) {
         let modal = $('#edit-cell-modal');
@@ -51,23 +68,29 @@
         url_safe_key_input.val(key);
     };
 
+
     ecns.openModal = function(cellKey, markdownText) {
         ecns.setUrlSafeKey(cellKey);
         let modal = $('#edit-cell-modal');
         $('#markdown-input').val(markdownText);
         $('#edit-cell-modal').modal();
+        $('#markdown-input').focus();
     };
+
 
     ecns.closeModal = function(cell_key) {
         ecns.resetCurrentCell();
         $('#edit-cell-modal').modal('toggle');
     };
 
+
     ecns.completeHandler = function() { };
+
 
     ecns.setCompleteHandler = function(f) {
         ecns.completeHandler = f;
     };
+
 
     ecns.submitChanges = function(newText, url_safe_key) {
         $.ajax({
@@ -105,6 +128,10 @@
         let urlSafeKey = ecns.getUrlSafeKey();
         let text = ecns.getText();
         ecns.submitChanges(text, urlSafeKey);
+    });
+
+    $('#reset-input-button').click(function() {
+        ecns.resetEdits();
     });
 
 

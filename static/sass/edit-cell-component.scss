@@ -4,10 +4,16 @@
 }
 
 #edit-cell-modal-dialog {
-
+    width: 75%;
 }
 
 #markdown-input {
     height: 400px;
     resize: vertical;
+    width: 100%;
+}
+
+#reset-input-button {
+    float: left;
+    margin-left: 5%;
 }
