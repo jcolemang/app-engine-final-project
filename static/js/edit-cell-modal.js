@@ -9,12 +9,33 @@
 
     let converter = md.converter;
 
+    ecns.setCurrentCell = function(currentCell) {
+        ecns.currentCell = currentCell;
+    };
+
+    ecns.getCurrentCell = function() {
+        return ecns.currentCell;
+    };
+
+    ecns.resetCurrentCell = function() {
+        ecns.currentCell = undefined;
+    };
+
     ecns.getText = function() {
         return $('#markdown-input').val();
     };
 
+    ecns.setText = function(text) {
+        $('#markdown-input').val(text);
+    };
+
+    ecns.saveEdits = function(text) {
+        ecns.getCurrentCell().find('.hidden-markdown-edits').html(text);
+    };
+
     ecns.respondToInput = function() {
         let text = ecns.getText();
+        ecns.saveEdits(text);
         $('#markdown-preview').html(converter.makeHtml(text));
     };
 
@@ -38,6 +59,7 @@
     };
 
     ecns.closeModal = function(cell_key) {
+        ecns.resetCurrentCell();
         $('#edit-cell-modal').modal('toggle');
     };
 
@@ -71,7 +93,9 @@
     $('.calendar-cell').click(function() {
         let url_safe_key = $(this).attr('id');
         let clickedCell = $(this);
-        let markdownText = clickedCell.find('.hidden-markdown').html();
+        let markdownText = clickedCell.find('.hidden-markdown-edits').html();
+        ecns.setCurrentCell(clickedCell);
+        ecns.setText(markdownText);
         ecns.openModal(url_safe_key, markdownText);
         ecns.respondToInput();
     });
