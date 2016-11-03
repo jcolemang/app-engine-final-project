@@ -8,5 +8,4 @@ from handlers.create_user_page_handler import CreateUserPageHandler
 app = webapp2.WSGIApplication([
     ('/', DashboardPageHandler),
     ('/calendar/(.*)/(.*)', CalendarPageHandler),
-    ('/create-user', CreateUserPageHandler),
 ], debug=True)
