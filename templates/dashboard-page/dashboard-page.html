@@ -11,16 +11,18 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Here is the dashboard!</h1>
-  <h2>Here is your email: {{ email }}</h2>
-  <h2>Here is your username: {{ username }}</h2>
 
-  <h1>Here are your calendars</h1>
-  {% for calendar in calendar_query %}
-    <div>
-      <a href="/calendar/{{username}}/{{calendar.name}}">{{ calendar.name }}</a>
+  <div class="page-header">
+    <h1 class="page-title">Hello, {{ username }}!</h1>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      {% for calendar in calendar_query %}
+        {% include 'dashboard-page/calendar-card.html' %}
+      {% endfor %}
     </div>
-  {% endfor %}
+  </div>
 
   <form method="post">
     <input id="calendar-name-input" type="text" name="calendar-name">

@@ -1,10 +1,13 @@
 body {
   font-family: 'Open Sans', sans-serif; }
 
-.container-fluid div {
-  font-size: 25pt; }
-
 tr {
   height: 50px; }
+
+.page-header {
+  margin: 5%; }
+
+.page-title {
+  text-align: center; }
 
 /*# sourceMappingURL=global.css.map */

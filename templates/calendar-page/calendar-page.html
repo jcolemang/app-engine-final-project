@@ -11,9 +11,10 @@
 
 
 {% block css %}
-  <link rel="stylesheet" href="/static/css/calendar-page.css">
+  <link rel="stylesheet" hef="/static/css/calendar-page.css">
   <link rel="stylesheet" href="/static/css/calendar-component.css">
   <link rel="stylesheet" href="/static/css/edit-cell-component.css">
+    <link rel="stylesheet" href="/static/css/calendar-card.css">
 {% endblock %}
 
 
@@ -28,9 +29,9 @@
   {% include 'calendar-page/edit-cell-modal.html' %}
 
   <!-- The page header -->
-  <div class="row text-center">
+  <div class="row text-center page-header">
     <div class="col-xs-12 col-md-10 col-md-offset-1">
-      <h1>{{ calendar.name }}</h1>
+      <h1 class="page-title">{{ calendar.name }}</h1>
     </div>
   </div>
 

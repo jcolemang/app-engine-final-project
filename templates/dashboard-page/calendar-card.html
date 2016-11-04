@@ -1,1 +1,27 @@
 
+<!-- expects a calendar object: 'calendar' -->
+<!-- expects a user object: 'user' -->
+
+<div class="calendar-card-container">
+  <div class="col-lg-2 col-md-4 col-xs-6">
+    <div class="panel panel-default calendar-card">
+
+      <div class="panel-header">
+        <h2>{{ calendar.name }}</h2>
+      </div>
+
+      <div class="panel-body">
+        <p class="card-text">
+          Here is a calendar description
+        </p>
+      </div>
+
+      <div class="panel-footer">
+        <a class="btn btn-primary open-calendar-button"
+           href="/calendar/{{username}}/{{calendar.name}}">
+          Open
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
