@@ -1,8 +1,31 @@
 
-.calendar-table {
+#calendar-table {
     width: 100%;
+    border-collapse: collapse;
 }
 
 .calendar-data {
     text-align: center;
+}
+
+.add-row-button {
+    position: absolute;
+    display: block;
+    left: -100px;
+}
+
+.add-a-row-row {
+    text-align: center;
+}
+
+.add-a-row-div {
+    width: 100%;
+}
+
+.add-row-hidden-row, .app-row-hidden-data {
+    margin: 0px;
+}
+
+#add-row-end {
+    bottom: 100%;
 }

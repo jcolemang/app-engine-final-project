@@ -22,4 +22,8 @@
         currCell.find('.visible-text').html(visibleHtml);
     });
 
+    $('.add-a-row-div').click(function() {
+        alert('Add a row!');
+    });
+
 })(calendar_namespace);
