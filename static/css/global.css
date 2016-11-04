@@ -4,4 +4,7 @@ body {
 .container-fluid div {
   font-size: 25pt; }
 
+tr {
+  height: 50px; }
+
 /*# sourceMappingURL=global.css.map */
