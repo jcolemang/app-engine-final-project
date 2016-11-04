@@ -5,21 +5,30 @@
 .calendar-data {
   text-align: center; }
 
-.add-row-button {
-  position: absolute;
-  display: block;
-  left: -100px; }
+.calendar-cell {
+  cursor: pointer; }
 
 .add-a-row-row {
-  text-align: center; }
+  text-align: center;
+  height: 20px; }
 
 .add-a-row-div {
-  width: 100%; }
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+  background-color: transparent; }
 
 .add-row-hidden-row, .app-row-hidden-data {
   margin: 0px; }
 
 #add-row-end {
   bottom: 100%; }
+
+.calendar-clickable:hover {
+  transition: 0.5s;
+  background-color: rgba(200, 0, 0, 0.75); }
+
+.calendar-clickable {
+  transition: 0.5s; }
 
 /*# sourceMappingURL=calendar-component.css.map */

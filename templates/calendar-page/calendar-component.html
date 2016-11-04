@@ -18,13 +18,16 @@
     <tbody>
       {% for row_key in calendar.row_keys %}
         <tr class="add-a-row-row">
-          <td colspan="{{ calendar.column_names|length }}">
-            <div id="{{ row_key.urlsafe() }}" class="add-a-row-div">+</div>
+          <td id="{{ row_key.urlsafe() }}"
+              colspan="{{ calendar.column_names|length }}"
+              class="add-a-row-div calendar-clickable">
+            +
+            <!-- <div id="{{ row_key.urlsafe() }}" class="add-a-row-div calendar-clickable">+</div> -->
           </td>
         </tr>
         <tr>
           {% for cell_key in row_key.get().cell_keys %}
-            <td id="{{cell_key.urlsafe()}}" class="calendar-cell">
+            <td id="{{cell_key.urlsafe()}}" class="calendar-cell calendar-clickable">
               <div class="hidden-markdown hidden">{{ cell_key.get().text }}</div>
               <div class="hidden-markdown-edits hidden">{{ cell_key.get().text }}</div>
               <div class="visible-text"></div>
@@ -34,7 +37,7 @@
       {% endfor %}
       <tr class="add-a-row-row">
         <td colspan="{{ calendar.column_names|length }}">
-          <div id="last-row" class="add-a-row-div">+</div>
+          <div id="last-row" class="add-a-row-div calendar-clickable">+</div>
         </td>
       </tr>
     </tbody>
