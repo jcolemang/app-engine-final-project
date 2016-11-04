@@ -23,7 +23,13 @@
     });
 
     $('.add-a-row-div').click(function() {
-        alert('Add a row!');
+        let prevRowId = $(this).attr('id');
+        data = {
+            'addAfter': prevRowId
+        };
+        $.post('', data, response => {
+            location.reload();
+        });
     });
 
 })(calendar_namespace);

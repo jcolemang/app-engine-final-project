@@ -37,6 +37,22 @@ def create_default_calendar(current_user, name):
     return calendar
 
 
+def insert_row(calendar, current_user, index):
+    row = CalendarRow(parent=calendar.key)
+    row.put()
+
+    cell_keys = []
+    for i in range(len(calendar.column_names)):
+        cell = Cell(parent=row.key)
+        cell.put()
+        cell_keys.append(cell.key)
+
+    row.cell_keys = cell_keys
+    row.put()
+    calendar.row_keys.insert(index, row.key)
+    calendar.put()
+
+
 def append_calendar_row(calendar, current_user, num_columns=None):
     if not num_columns:
         num_columns = len(calendar.column_names)
@@ -52,7 +68,6 @@ def append_calendar_row(calendar, current_user, num_columns=None):
 
     row.cell_keys = cell_keys
     row.put()
-    print row.cell_keys
 
     calendar.row_keys.append(row.key)
     calendar.put()

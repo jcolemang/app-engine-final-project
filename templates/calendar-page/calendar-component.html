@@ -19,7 +19,7 @@
       {% for row_key in calendar.row_keys %}
         <tr class="add-a-row-row">
           <td colspan="{{ calendar.column_names|length }}">
-            <div class="add-a-row-div">+</div>
+            <div id="{{ row_key.urlsafe() }}" class="add-a-row-div">+</div>
           </td>
         </tr>
         <tr>
@@ -34,7 +34,7 @@
       {% endfor %}
       <tr class="add-a-row-row">
         <td colspan="{{ calendar.column_names|length }}">
-          <div class="add-a-row-div">+</div>
+          <div id="last-row" class="add-a-row-div">+</div>
         </td>
       </tr>
     </tbody>
