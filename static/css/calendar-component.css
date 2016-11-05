@@ -22,7 +22,7 @@
 
 .calendar-clickable:hover {
   transition: 0.5s;
-  background-color: rgba(200, 0, 0, 0.75); }
+  background-color: #c8c8c8; }
 
 .calendar-clickable {
   transition: 0.5s;
