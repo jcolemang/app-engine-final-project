@@ -16,14 +16,71 @@
 
       <div class="modal-body">
         <form>
-          <div class="input-group">
+
+          <!-- Number of days to use -->
+          <div id="num-days-input-group" class="form-group">
+            <label for="num-days-input">Number of Days</label>
+            <input id="num-days-input"
+                   name="num-days-input"
+                   type="number"
+                   class="form-control">
+          </div>
+
+          <!-- Start date input -->
+          <div class="form-group">
+            <label for="start-date-input">Start Date</label>
+            <input id="start-date-input"
+                   name="start-date-input"
+                   type="date"
+                   class="form-control">
+          </div>
+
+          <!-- adding vacations -->
+          <div class="form-group">
+
+            <!-- start of the vacation -->
+            <label for="vacation-days-input-start">
+              Vacation Start
+            </label>
+            <input id="vacation-days-input-start"
+                   name="vacation-days-input-start"
+                   type="date"
+                   class="form-control">
+
+            <!-- end of the vacation -->
+            <label for="vacation-days-input-end">
+              Vacation End
+            </label>
+            <input id="vacation-days-input-end"
+                   name="vacation-days-input-end"
+                   type="date"
+                   class="form-control">
+
+            <!-- adding the vacation range -->
+            <button id="add-vacation-range-button"
+                    class="btn btn-primary">
+              Add
+            </button>
 
           </div>
+
+          <!-- displaying the vacations -->
+          <ul id="vacation-range-list"></ul>
+
         </form>
       </div>
 
       <div class="modal-footer">
-
+        <button type="button"
+                class="btn btn-primary"
+                id="populate-dates-modal-cancel-button">
+          Cancel
+        </button>
+        <button type="button"
+                class="btn btn-primary"
+                id="populate-dates-modal-submit-button">
+          Submit
+        </button>
       </div>
 
     </div>
