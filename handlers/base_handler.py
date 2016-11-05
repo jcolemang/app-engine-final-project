@@ -31,7 +31,7 @@ class BaseHandler(RequestHandler):
     def get(self):
         auth_user = self.get_auth_user()
         email = auth_user.email().lower()
-        user = utils.get_curr_user_from_email(email)
+        user = utils.get_user_from_email(email)
         if not user:
             user = utils.create_user(email)
         template = self.get_template()
@@ -43,7 +43,7 @@ class BaseHandler(RequestHandler):
     def post(self):
         auth_user = self.get_auth_user()
         user_email = auth_user.email().lower()
-        curr_user = utils.get_curr_user_from_email(user_email)
+        curr_user = utils.get_user_from_email(user_email)
         self.handle_post(curr_user)
 
 
