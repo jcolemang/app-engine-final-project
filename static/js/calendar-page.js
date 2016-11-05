@@ -4,6 +4,7 @@
 
 (function (cns) {
 
+    cns.calendar_page_namespace = cns.calendar_page_namespace || {};
     let ecns = cns.edit_cell_modal_namespace;
     let md = cns.markdown_namespace;
 
