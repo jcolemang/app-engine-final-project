@@ -11,7 +11,7 @@ $add-a-row-height: 20px;
 }
 
 .calendar-cell {
-    cursor: pointer;
+
 }
 
 .add-a-row-row {
@@ -22,7 +22,6 @@ $add-a-row-height: 20px;
 .add-a-row-div {
     width: 100%;
     height: $add-a-row-height;
-    cursor: pointer;
     background-color: transparent;
 }
 
@@ -41,4 +40,5 @@ $add-a-row-height: 20px;
 
 .calendar-clickable {
     transition: 0.5s;
+    cursor: pointer;
 }

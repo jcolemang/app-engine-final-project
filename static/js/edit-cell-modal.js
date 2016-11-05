@@ -109,11 +109,12 @@
         });
     };
 
+
     // setting up the automatic updates
     $('#markdown-input').keyup(ecns.respondToInput);
 
     // open the modal when a key is pressed
-    $('.calendar-cell').click(function() {
+    $('.calendar-cell.calendar-clickable').click(function() {
         let url_safe_key = $(this).attr('id');
         let clickedCell = $(this);
         let markdownText = clickedCell.find('.hidden-markdown-edits').html();

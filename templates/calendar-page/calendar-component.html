@@ -1,5 +1,4 @@
 
-
 <div class="calendar-table-div">
   <table id="calendar-table" class="table table-bordered">
 
@@ -17,29 +16,44 @@
     <!-- table cells -->
     <tbody>
       {% for row_key in calendar.row_keys %}
-        <tr class="add-a-row-row">
-          <td id="{{ row_key.urlsafe() }}"
-              colspan="{{ calendar.column_names|length }}"
-              class="add-a-row-div calendar-clickable">
-            +
-            <!-- <div id="{{ row_key.urlsafe() }}" class="add-a-row-div calendar-clickable">+</div> -->
-          </td>
-        </tr>
+
+        <!-- displayed between rows to be able to insert additional rows -->
+        {% if user_owns_calendar %}
+          <tr class="add-a-row-row">
+            <td id="{{ row_key.urlsafe() }}"
+                colspan="{{ calendar.column_names|length }}"
+                class="add-a-row-div calendar-clickable">
+              +
+            </td>
+          </tr>
+        {% endif %}
+
         <tr>
           {% for cell_key in row_key.get().cell_keys %}
-            <td id="{{cell_key.urlsafe()}}" class="calendar-cell calendar-clickable">
+            <td id="{{cell_key.urlsafe()}}"
+                class="{% if user_owns_calendar %}calendar-clickable {% endif %}calendar-cell">
+
+              <!-- hidden divs to make editting more pleasant -->
               <div class="hidden-markdown hidden">{{ cell_key.get().text }}</div>
-              <div class="hidden-markdown-edits hidden">{{ cell_key.get().text }}</div>
+              {% if user_owns_calendar %}
+                <div class="hidden-markdown-edits hidden">{{ cell_key.get().text }}</div>
+              {% endif %}
+
+              <!-- the visible markdown -->
               <div class="visible-text"></div>
             </td>
           {% endfor %}
         </tr>
       {% endfor %}
-      <tr class="add-a-row-row">
-        <td colspan="{{ calendar.column_names|length }}">
-          <div id="last-row" class="add-a-row-div calendar-clickable">+</div>
-        </td>
-      </tr>
+
+      <!-- add a row at the very end -->
+      {% if user_owns_calendar %}
+        <tr class="add-a-row-row">
+          <td colspan="{{ calendar.column_names|length }}">
+            <div id="last-row" class="add-a-row-div calendar-clickable">+</div>
+          </td>
+        </tr>
+      {% endif %}
     </tbody>
 
   </table>

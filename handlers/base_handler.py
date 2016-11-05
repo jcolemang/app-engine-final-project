@@ -24,6 +24,10 @@ class BaseHandler(RequestHandler):
         return auth_user
 
 
+    def get_auth_user_email(self, auth_user):
+         return auth_user.email().lower()
+
+
     def get(self):
         auth_user = self.get_auth_user()
         email = auth_user.email().lower()
