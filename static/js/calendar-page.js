@@ -10,11 +10,30 @@
 
     // setting up the calendar page
 
+    cns.getLocation = function() {
+        return window.location.pathname;
+    };
+
+
+    cns.getUsername = function() {
+        let loc = cns.getLocation();
+        let username =  /\/calendar\/(.*?)\/.*/.exec(loc)[1];
+        return username;
+    };
+
+
+    cns.getCalendarName = function() {
+        let loc = cns.getLocation();
+        let name = /\/calendar\/.*?\/(.*)/.exec(loc)[1];
+        return name;
+    };
+
     let converter = md.converter;
 
     ecns.setCompleteHandler(function(id, newText) {
         $(id).find('.visible-text').html(converter.makeHtml(newText));
     });
+
 
     $('.calendar-cell').map(function() {
         let currCell = $(this);
@@ -22,6 +41,7 @@
         let visibleHtml = converter.makeHtml(markdownText);
         currCell.find('.visible-text').html(visibleHtml);
     });
+
 
     $('.add-a-row-div').click(function() {
         let prevRowId = $(this).attr('id');
@@ -32,5 +52,8 @@
             location.reload();
         });
     });
+
+
+
 
 })(calendar_namespace);

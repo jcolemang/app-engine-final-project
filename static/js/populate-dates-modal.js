@@ -12,7 +12,6 @@
 
     pdmn.addVacationRange = function(newStart, newEnd) {
         vacationPairs.push([newStart, newEnd]);
-        console.log(vacationPairs);
     };
 
 
@@ -41,7 +40,39 @@
     };
 
 
-    // event listeners
+    pdmn.validateNumDays = function(val) {
+        return /^\s*[0-9]+\s*$/.test(val) && +val > 0;
+    };
+
+
+    pdmn.checkNumDaysInput = function() {
+
+        let numDays = $('#num-days-input').val();
+        let isValid = pdmn.validateNumDays(numDays);
+
+        if (!isValid) {
+            $('#num-days-input-group').addClass('has-error');
+            return false;
+        }
+
+        $('#num-days-input-group').removeClass('has-error');
+        return numDays;
+    };
+
+
+
+    // modal input bindings
+
+    $('#populate-dates-btn').click(function() {
+        $('#populate-dates-modal').modal();
+    });
+
+
+    $('#num-days-input').change(pdmn.checkNumDaysInput);
+
+
+    $('#num-days-input').keyup(pdmn.checkNumDaysInput);
+
 
     $('#add-vacation-range-button').click(function() {
         let vacationStart = $('#vacation-days-input-start').val();
@@ -49,6 +80,46 @@
         pdmn.addVacationRange(vacationStart, vacationEnd);
         pdmn.updateVacationRangeList();
     });
+
+
+    $('#populate-dates-modal-cancel-button').click(function() {
+        $('#populate-dates-modal').modal('toggle');
+    });
+
+
+    $('#populate-dates-modal-submit-button').click(function() {
+        let isValid = true;
+        let numDays = pdmn.checkNumDaysInput();
+        isValid = isValid && numDays;
+
+        if (!isValid) {
+            return false;
+        }
+
+        console.log(vacationPairs);
+
+        $.ajax({
+            url: '/generate-calendar',
+            method: 'POST',
+            data: {
+                'calendarName': cns.getCalendarName(),
+                'username': cns.getUsername(),
+                'numDays': numDays,
+                'vacationRanges': JSON.stringify(vacationPairs)
+            },
+
+            success: function(resp) {
+
+            },
+
+            error: function() {
+
+            }
+        });
+
+        return true;
+    });
+
 
 })(calendar_namespace,
    calendar_namespace.calendar_page_namespace,

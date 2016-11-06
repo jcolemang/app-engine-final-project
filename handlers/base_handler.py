@@ -9,6 +9,10 @@ from models import User
 import utils
 
 
+class GetNotAllowed(Exception):
+    pass
+
+
 class BaseHandler(RequestHandler):
 
     # setting the environment

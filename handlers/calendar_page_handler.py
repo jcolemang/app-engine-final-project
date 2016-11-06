@@ -1,9 +1,32 @@
 from google.appengine.api import users
 from google.appengine.ext import ndb
+import json
 
-from base_handler import BaseHandler
+from base_handler import BaseHandler, GetNotAllowed
 from models import CalendarRow
 import utils
+
+
+class GenerateDatesHandler(BaseHandler):
+
+    def get(self):
+        raise GetNotAllowed('Page does not support get requests')
+
+
+    def post(self):
+        auth_user = self.get_auth_user()
+        auth_user_email = self.get_auth_user_email(auth_user)
+        user = utils.get_user_from_email(auth_user_email)
+        calendar_username = self.request.get('username')
+        calendar_name = self.request.get('calendarName')
+        num_days = self.request.get('numDays')
+        vacation_ranges = json.loads(self.request.get('vacationRanges'))
+
+        if user.username != calendar_username:
+            raise Exception('Change this to be more specific')
+
+        print calendar_username, calendar_name, num_days, vacation_ranges
+
 
 
 class CalendarPageHandler(BaseHandler):
