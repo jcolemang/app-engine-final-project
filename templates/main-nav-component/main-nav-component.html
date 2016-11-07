@@ -1,6 +1,10 @@
 
-{% set nav_links = [
+{% set left_nav_links = [
   ('Home', '/'),
+] %}
+
+{% set right_nav_links = [
+  ('Logout', logout_url),
 ] %}
 
 <div class="navbar">
@@ -24,7 +28,7 @@
   <div class="collapse navbar-collapse"
        id="main-nav-collapse">
     <ul class="nav navbar-nav">
-      {% for name, link in nav_links %}
+      {% for name, link in left_nav_links %}
         <li class="{% if path == link  %}active{% else %}default{% endif %}">
           <a href="{{ link }}">
             {{ name }}
@@ -34,10 +38,13 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
-      <li class="default">
-        <a href="{{ logout_url }}">
-          Logout
-        </a>
+      {% for name, link in right_nav_links %}
+        <li class="default">
+          <a href="{{ link }}">
+            {{ name }}
+          </a>
+        </li>
+      {% endfor %}
       </li>
     </ul>
 
