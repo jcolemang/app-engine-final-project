@@ -4,17 +4,21 @@
 {% block javascript %}
   <script src="/vendor/js/Markdown.Converter.js"></script>
   <script src="/vendor/js/Markdown.Sanitizer.js"></script>
+  <script src="/vendor/js/bootstrap-datepicker.min.js"></script>
   <script src="/static/js/markdown.js"></script>
   <script src="/static/js/edit-cell-modal.js"></script>
   <script src="/static/js/calendar-page.js"></script>
+  <script src="/static/js/calendar-edit-toolbar.js"></script>
+  <script src="/static/js/populate-dates-modal.js"></script>
 {% endblock %}
 
 
 {% block css %}
-  <link rel="stylesheet" hef="/static/css/calendar-page.css">
+  <link rel="stylesheet" href="/vendor/css/bootstrap-datepicker3.min.css">
+  <link rel="stylesheet" href="/static/css/calendar-page.css">
   <link rel="stylesheet" href="/static/css/calendar-component.css">
   <link rel="stylesheet" href="/static/css/edit-cell-component.css">
-    <link rel="stylesheet" href="/static/css/calendar-card.css">
+  <link rel="stylesheet" href="/static/css/calendar-card.css">
 {% endblock %}
 
 
@@ -34,6 +38,17 @@
       <h1 class="page-title">{{ calendar.name }}</h1>
     </div>
   </div>
+
+  <!-- tools for editing the calendar -->
+  {% if user_owns_calendar %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          {% include 'calendar-page/calendar-edit-toolbar.html' %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
 
   <!-- The calendar itself -->
   <div id="calendar-component-div" class="row">
