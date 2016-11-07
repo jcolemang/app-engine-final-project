@@ -1,7 +1,8 @@
 from google.appengine.ext import ndb
 import re
+from datetime import datetime
 
-from models import User, Calendar, Cell, DoesNotExistError, CalendarRow, RepeatCalendarException
+from models import User, Calendar, Cell, DoesNotExistError, CalendarRow, RepeatCalendarException, DateCell
 
 # some constants
 username_re = re.compile('(.*)@.*')
@@ -33,11 +34,11 @@ def create_default_calendar(current_user, name):
                         name=name)
     calendar.column_names = Calendar.default_columns
     calendar.put()
-    append_calendar_row(calendar, current_user)
+    insert_row(calendar, current_user, datetime.today().date())
     return calendar
 
 
-def insert_row(calendar, current_user, index):
+def insert_row(calendar, current_user, date):
     row = CalendarRow(parent=calendar.key)
     row.put()
 
@@ -47,28 +48,12 @@ def insert_row(calendar, current_user, index):
         cell.put()
         cell_keys.append(cell.key)
 
-    row.cell_keys = cell_keys
-    row.put()
-    calendar.row_keys.insert(index, row.key)
-    calendar.put()
-
-
-def append_calendar_row(calendar, current_user, num_columns=None):
-    if not num_columns:
-        num_columns = len(calendar.column_names)
-
-    row = CalendarRow(parent=calendar.key)
-    row.put()
-
-    cell_keys = []
-    for i in range(num_columns):
-        cell = Cell(parent=row.key)
-        cell.put()
-        cell_keys.append(cell.key)
+    date_cell = DateCell(parent=row.key, date=date)
+    date_cell.put()
 
     row.cell_keys = cell_keys
+    row.date_cell = date_cell.key
     row.put()
-
     calendar.row_keys.append(row.key)
     calendar.put()
 

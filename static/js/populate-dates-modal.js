@@ -96,7 +96,7 @@
             return false;
         }
 
-        console.log(vacationPairs);
+        let startDate = $('#start-date-input').val();
 
         $.ajax({
             url: '/generate-calendar',
@@ -105,11 +105,12 @@
                 'calendarName': cns.getCalendarName(),
                 'username': cns.getUsername(),
                 'numDays': numDays,
+                'startDate': startDate,
                 'vacationRanges': JSON.stringify(vacationPairs)
             },
 
             success: function(resp) {
-
+                location.reload();
             },
 
             error: function() {

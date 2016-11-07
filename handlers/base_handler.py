@@ -9,7 +9,7 @@ from models import User
 import utils
 
 
-class GetNotAllowed(Exception):
+class UnauthorizedException(Exception):
     pass
 
 
@@ -69,7 +69,8 @@ class BaseHandler(RequestHandler):
             'user': user,
             'username': user.username,
             'email': user.email,
-            'logout_url': users.create_logout_url('/')
+            'logout_url': users.create_logout_url('/'),
+            'date_format': '%a, %b %e'
         }
 
 

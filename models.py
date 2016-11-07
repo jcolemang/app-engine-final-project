@@ -17,13 +17,18 @@ class Cell(ndb.Model):
     text = ndb.StringProperty(default='')
 
 
+class DateCell(ndb.Model):
+    date = ndb.DateProperty()
+
+
 class CalendarRow(ndb.Model):
     cell_keys = ndb.KeyProperty(kind=Cell, repeated=True)
+    date_cell = ndb.KeyProperty(kind=DateCell)
 
 
 class Calendar(ndb.Model):
 
-    default_columns = ['session', 'content', 'due', 'preparation']
+    default_columns = ['Date', 'Session', 'Content', 'Due', 'Preparation']
 
     owner = ndb.KeyProperty()
     name = ndb.StringProperty()
