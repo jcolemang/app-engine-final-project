@@ -10,7 +10,7 @@ from models import RepeatCalendarException
 class DashboardPageHandler(BaseHandler):
 
     template_name = 'dashboard-page/dashboard-page.html'
-    valid_name_re = re.compile(r'^\w+$')
+    valid_name_re = re.compile(r'^[a-zA-Z\-0-9_]+$$')
 
 
     def calendar_name_is_valid(self, name):
