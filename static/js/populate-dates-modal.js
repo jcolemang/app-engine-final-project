@@ -63,9 +63,6 @@
 
     // modal input bindings
 
-    $('#populate-dates-btn').click(function() {
-        $('#populate-dates-modal').modal();
-    });
 
 
     $('#num-days-input').change(pdmn.checkNumDaysInput);
