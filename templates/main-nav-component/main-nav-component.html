@@ -38,6 +38,14 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right">
+
+      {% if path == '/' %}
+        <li class="default">
+          <a data-toggle="modal" data-target="#create-calendar-modal" href="">
+            Create Calendar
+          </a>
+      {% endif %}
+
       {% for name, link in right_nav_links %}
         <li class="default">
           <a href="{{ link }}">
