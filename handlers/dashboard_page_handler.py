@@ -1,9 +1,10 @@
 
-from base_handler import BaseHandler
 import utils
 import re
-
 from google.appengine.api import users
+
+from base_handler import BaseHandler
+from models import RepeatCalendarException
 
 
 
@@ -12,7 +13,6 @@ class DashboardPageHandler(BaseHandler):
     template_name = 'dashboard-page/dashboard-page.html'
     valid_name_re = re.compile(r'^\w+$')
 
-    
     def calendar_name_is_valid(self, name):
         return DashboardPageHandler.valid_name_re.match(name) and True
 
@@ -25,13 +25,15 @@ class DashboardPageHandler(BaseHandler):
 
 
     def handle_post(self, user):
-        auth_user = users.get_current_user()
-        email = auth_user.email().lower()
-
-        calendar_name = self.request.get('calendar-name')
+        calendar_name = self.request.get('calendarName')
         if not self.calendar_name_is_valid(calendar_name):
             self.redirect('/')
             return False
 
-        calendar = utils.create_default_calendar(user, calendar_name)
-        self.redirect('/calendar/%s/%s' % (user.username, calendar_name))
+        try:
+            calendar = utils.create_default_calendar(user, calendar_name)
+        except RepeatCalendarException:
+            self.response.out.write('calendarexists')
+            return
+
+        self.response.out.write('/calendar/%s/%s' % (user.username, calendar_name))
