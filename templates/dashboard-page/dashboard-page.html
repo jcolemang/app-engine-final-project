@@ -3,7 +3,9 @@
 
 {% block javascript %}
   <script src="/static/js/create-calendar-modal.js"></script>
+  <script src="/static/js/delete-calendar-modal.js"></script>
   <script src="/static/js/dashboard-page.js"></script>
+  <script src="/static/js/calendar-card.js"></script>
 {% endblock %}
 
 {% block css %}
@@ -18,6 +20,9 @@
 
   <!-- Inserting a calendar -->
   {% include 'dashboard-page/create-calendar-modal.html' %}
+
+  <!-- Deleting a calendar -->
+  {% include 'dashboard-page/delete-calendar-modal.html' %}
 
   <!-- page title -->
   <div class="page-header">

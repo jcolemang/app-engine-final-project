@@ -61,9 +61,10 @@ def insert_row(calendar, current_user, date):
 def delete_row(calendar, row_key):
     row = row_key.get()
     row.date_cell.delete()
-    for cell in row.cell_keys:
-        cell.delete()
+    for cell_key in row.cell_keys:
+        cell_key.delete()
     calendar.row_keys.remove(row_key)
+    calendar.put()
     row_key.delete()
 
 
@@ -86,6 +87,19 @@ def get_calendar(user, calendar_name):
     if len(calendars) > 1:
         raise Exception('This should never happen')
     return calendars[0]
+
+
+def delete_calendar(user, calendar_name):
+    try:
+        calendar = get_calendar(user, calendar_name)
+    except DoesNotExistError:
+        return False
+
+    map(lambda row: delete_row(calendar, row.key),
+        map(lambda k: k.get(), calendar.row_keys))
+
+    calendar.key.delete()
+    return True
 
 
 def get_user_from_email(email):

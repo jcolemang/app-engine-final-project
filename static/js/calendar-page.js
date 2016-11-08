@@ -47,8 +47,6 @@
     $('.calendar-row-delete-button').click(function() {
         let rowKey = $(this).find('span.row-key').html();
 
-        console.log('SENDING AJAX');
-        console.log(rowKey);
         $.ajax({
             method: 'DELETE',
             url: window.location.pathname + '?rowKey=' + rowKey,

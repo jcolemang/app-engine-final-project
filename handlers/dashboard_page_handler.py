@@ -36,4 +36,13 @@ class DashboardPageHandler(BaseHandler):
             self.response.out.write('calendarexists')
             return
 
-        self.response.out.write('/calendar/%s/%s' % (user.username, calendar_name))
+        self.response.write('/calendar/%s/%s' % (user.username, calendar_name))
+
+
+    def delete(self):
+        auth_user = self.get_auth_user()
+        user_email = self.get_auth_user_email(auth_user)
+        user = utils.get_user_from_email(user_email)
+        calendar_name = self.request.get('calendarName')
+        utils.delete_calendar(user, calendar_name)
+        self.response.write('deleted')
