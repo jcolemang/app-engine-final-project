@@ -2,9 +2,18 @@
   text-align: center; }
 
 .calendar-card {
-  height: 200px; }
+  max-height: 300px; }
+
+.delete-calendar-button {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 20px;
+  margin-right: 20px; }
 
 .open-calendar-button {
-  width: 100%; }
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-left: 20px;
+  margin-right: 20px; }
 
 /*# sourceMappingURL=calendar-card.css.map */

@@ -1,12 +1,26 @@
 
+$calendar-card-max-height: 300px;
+$calendar-card-button-margin-vertical: 5px;
+$calendar-card-button-margin-horizontal: 20px;
+
 .calendar-card-container {
     text-align: center;
 }
 
 .calendar-card {
-    height: 200px;
+    max-height: $calendar-card-max-height;
+}
+
+.delete-calendar-button {
+    margin-bottom: $calendar-card-button-margin-vertical;
+    margin-top: $calendar-card-button-margin-vertical;
+    margin-left: $calendar-card-button-margin-horizontal;
+    margin-right: $calendar-card-button-margin-horizontal;
 }
 
 .open-calendar-button {
-    width: 100%;
+    margin-bottom: $calendar-card-button-margin-vertical;
+    margin-top: $calendar-card-button-margin-vertical;
+    margin-left: $calendar-card-button-margin-horizontal;
+    margin-right: $calendar-card-button-margin-horizontal;
 }
