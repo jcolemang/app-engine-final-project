@@ -1,5 +1,6 @@
 
 $add-a-row-height: 20px;
+$calendar-clickable-color: rgb(200, 200, 200);
 
 #calendar-table {
     width: 100%;
@@ -12,6 +13,10 @@ $add-a-row-height: 20px;
 
 .calendar-cell {
 
+}
+
+.calendar-row-delete-button {
+    width: 100%;
 }
 
 .add-a-row-row {
@@ -35,7 +40,7 @@ $add-a-row-height: 20px;
 
 .calendar-clickable:hover {
     transition: 0.5s;
-    background-color: rgb(200, 200, 200);
+    background-color: $calendar-clickable-color;
 }
 
 .calendar-clickable {

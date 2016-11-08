@@ -5,6 +5,9 @@
 .calendar-data {
   text-align: center; }
 
+.calendar-row-delete-button {
+  width: 100%; }
+
 .add-a-row-row {
   text-align: center;
   height: 20px; }
