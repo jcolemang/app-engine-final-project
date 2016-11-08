@@ -58,6 +58,15 @@ def insert_row(calendar, current_user, date):
     calendar.put()
 
 
+def delete_row(calendar, row_key):
+    row = row_key.get()
+    row.date_cell.delete()
+    for cell in row.cell_keys:
+        cell.delete()
+    calendar.row_keys.remove(row_key)
+    row_key.delete()
+
+
 def query_user_calendars(email):
     user = get_user_from_email(email)
     calendar_query = Calendar.query(ancestor=user.key)\

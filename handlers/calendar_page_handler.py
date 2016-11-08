@@ -152,6 +152,15 @@ class CalendarPageHandler(BaseHandler):
         self.response.write('it worked')
 
 
+    def delete(self, username, calendar_name):
+        user = utils.get_user_from_username(username)
+        calendar = utils.get_calendar(user, calendar_name)
+        url_safe_row_key = self.request.get('rowKey')
+        row_key = ndb.Key(urlsafe=url_safe_row_key)
+        utils.delete_row(calendar, row_key)
+        self.response.write('deleted')
+
+
     def get_template(self):
         return self.get_template_by_name(CalendarPageHandler.template_name)
 

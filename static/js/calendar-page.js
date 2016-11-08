@@ -44,16 +44,22 @@
     });
 
 
-    $('.add-a-row-div').click(function() {
-        let prevRowId = $(this).attr('id');
-        data = {
-            'addAfter': prevRowId
-        };
-        $.post('', data, response => {
-            location.reload();
+    $('.calendar-row-delete-button').click(function() {
+        let rowKey = $(this).find('span.row-key').html();
+
+        console.log('SENDING AJAX');
+        console.log(rowKey);
+        $.ajax({
+            method: 'DELETE',
+            url: window.location.pathname + '?rowKey=' + rowKey,
+            success: function() {
+                $('#' + rowKey).remove();
+            },
+            error: function() {
+
+            }
         });
     });
-
 
 
 

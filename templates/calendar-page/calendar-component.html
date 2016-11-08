@@ -21,7 +21,7 @@
     <tbody>
       {% for row_key in calendar.row_keys %}
 
-        <tr>
+        <tr id="{{ row_key.urlsafe() }}">
 
           <td id="{{ row_key.get().date_cell.urlsafe() }}"
               class="calendar-cell date-cell">
@@ -45,6 +45,7 @@
 
           <td class="delete-row-column">
             <button class="calendar-row-delete-button btn btn-danger">
+              <span class="hidden row-key">{{ row_key.urlsafe() }}</span>
               Delete
             </button>
           </td>
