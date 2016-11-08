@@ -6,7 +6,7 @@ from handlers.dashboard_page_handler import DashboardPageHandler
 from handlers.create_user_page_handler import CreateUserPageHandler
 
 app = webapp2.WSGIApplication([
-    ('/', DashboardPageHandler),
-    ('/calendar/(.*)/(.*)', CalendarPageHandler),
-    ('/generate-calendar', GenerateDatesHandler),
+    (r'/', DashboardPageHandler),
+    (r'/calendar/(.+?)/(.+?)[/]?', CalendarPageHandler),
+    (r'/generate-calendar', GenerateDatesHandler),
 ], debug=True)
