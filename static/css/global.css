@@ -1,6 +1,9 @@
 body {
   font-family: 'Open Sans', sans-serif; }
 
+.error {
+  color: red; }
+
 tr {
   height: 50px; }
 

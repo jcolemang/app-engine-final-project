@@ -1,0 +1,47 @@
+
+<div id="create-calendar-modal" class="modal fade" role="dialog">
+  <div id="create-calendar-modal-dialog" class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form>
+
+        <!-- header -->
+        <div class="modal-header">
+          <button type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title">Create Calendar</h4>
+        </div>
+
+        <!-- body -->
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="calendar-name-input">Calendar Name</label>
+            <input type="text"
+                   id="calendar-name-input"
+                   name="calendar-name-input"
+                   placeholder="Calendar name"
+                   class="form-control">
+            <label id="calendar-name-input-error" class="error"></label>
+          </div>
+
+        </div>
+
+        <!-- footer -->
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-default">
+            Cancel
+          </button>
+
+          <button id="create-calendar-button" type="button" class="btn btn-primary">
+            Create
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
