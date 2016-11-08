@@ -6,6 +6,9 @@
     <!-- table column names -->
     <thead>
       <tr class="calendar-row">
+        <th class="calendar-data">
+          <span>Date</span>
+        </th>
         {% for col_name in calendar.column_names %}
           <th class="calendar-data">
             <span>{{ col_name }}</span>
@@ -17,17 +20,6 @@
     <!-- table cells -->
     <tbody>
       {% for row_key in calendar.row_keys %}
-
-        <!-- displayed between rows to be able to insert additional rows -->
-        {% if user_owns_calendar %}
-          <tr class="add-a-row-row">
-            <td id="{{ row_key.urlsafe() }}"
-                colspan="{{ calendar.column_names|length }}"
-                class="add-a-row-div calendar-clickable">
-              +
-            </td>
-          </tr>
-        {% endif %}
 
         <tr>
 
@@ -53,14 +45,6 @@
         </tr>
       {% endfor %}
 
-      <!-- add a row at the very end -->
-      {% if user_owns_calendar %}
-        <tr class="add-a-row-row">
-          <td colspan="{{ calendar.column_names|length }}">
-            <div id="last-row" class="add-a-row-div calendar-clickable">+</div>
-          </td>
-        </tr>
-      {% endif %}
     </tbody>
 
   </table>

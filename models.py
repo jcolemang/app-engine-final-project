@@ -28,7 +28,8 @@ class CalendarRow(ndb.Model):
 
 class Calendar(ndb.Model):
 
-    default_columns = ['Date', 'Session', 'Content', 'Due', 'Preparation']
+    # date is implicit
+    default_columns = ['Session', 'Content', 'Due', 'Preparation']
 
     owner = ndb.KeyProperty()
     name = ndb.StringProperty()

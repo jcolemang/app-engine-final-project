@@ -7,7 +7,7 @@
     let ecns = cns.edit_cell_modal_namespace;
     let md = cns.markdown_namespace;
 
-    let converter = md.converter;
+    let converter = new Markdown.Converter();
 
 
     ecns.setCurrentCell = function(currentCell) {

@@ -28,7 +28,8 @@
         return name;
     };
 
-    let converter = md.converter;
+
+    let converter = new Markdown.Converter();
 
     ecns.setCompleteHandler(function(id, newText) {
         $(id).find('.visible-text').html(converter.makeHtml(newText));
@@ -38,7 +39,7 @@
     $('.calendar-cell').map(function() {
         let currCell = $(this);
         let markdownText = currCell.find('.hidden-markdown').html();
-        let visibleHtml = converter.makeHtml(markdownText);
+        let visibleHtml = converter.makeHtml(markdownText || '');
         currCell.find('.visible-text').html(visibleHtml);
     });
 
