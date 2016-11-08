@@ -6,12 +6,13 @@ import re
 from google.appengine.api import users
 
 
+
 class DashboardPageHandler(BaseHandler):
 
     template_name = 'dashboard-page/dashboard-page.html'
     valid_name_re = re.compile(r'^\w+$')
 
-
+    
     def calendar_name_is_valid(self, name):
         return DashboardPageHandler.valid_name_re.match(name) and True
 
