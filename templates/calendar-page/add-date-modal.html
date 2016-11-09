@@ -1,0 +1,48 @@
+
+
+<div id="add-row-date-modal" class="modal fade" role="dialog">
+  <input type="text" class="hidden" id="clicked-modal-key">
+  <div id="add-row-date-dialog" class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <!-- Modal header -->
+      <div class="modal-header">
+        <button type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add Date</h4>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form>
+          <span id="add-row-date-modal-row-key" class="hidden"></span>
+          <div class="form-group">
+            <label for="add-row-date-date-input">
+              New Date
+            </label>
+            <input type="date"
+                   id="add-row-date-date-input"
+                   class="form-control"
+                   name="add-row-date-date-input">
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" id="add-row-date-modal-submit-button">
+          Change Date
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

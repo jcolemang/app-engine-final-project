@@ -24,13 +24,16 @@
         <tr id="{{ row_key.urlsafe() }}">
 
           <td id="{{ row_key.get().date_cell.urlsafe() }}"
-              class="calendar-cell date-cell">
-            {{ row_key.get().date_cell.get().date.strftime(date_format) }}
+              class="calendar-cell date-cell{% if user_owns_calendar %} calendar-clickable{% endif %}"
+              data-toggle="modal"
+              data-target="#edit-row-date-modal">
+            <span class="hidden date-cell-row-key">{{ row_key.urlsafe() }}</span>
+            <span class="date-cell-date">{{ row_key.get().date_cell.get().date.strftime(date_format) }}</span>
           </td>
 
           {% for cell_key in row_key.get().cell_keys %}
             <td id="{{cell_key.urlsafe()}}"
-                class="{% if user_owns_calendar %}calendar-clickable {% endif %}calendar-cell">
+                class="{% if user_owns_calendar %}calendar-clickable {% endif %}calendar-cell not-a-date">
 
               <!-- hidden divs to make editting more pleasant -->
               <div class="hidden-markdown hidden">{{ cell_key.get().text }}</div>

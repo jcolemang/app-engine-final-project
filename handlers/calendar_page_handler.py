@@ -1,5 +1,5 @@
 from google.appengine.api import users
-from google.appengine.ext import ndb
+from google.appengine.ext import ndb, deferred
 import json
 from datetime import date, timedelta, datetime
 
@@ -8,6 +8,9 @@ from models import CalendarRow
 import utils
 
 
+# helpers
+DATE_FORMAT = '%Y-%m-%d'
+str_to_date = lambda d, s: datetime.strptime(d, s).date()
 
 class GenerateDatesHandler(BaseHandler):
 
@@ -26,9 +29,6 @@ class GenerateDatesHandler(BaseHandler):
         if user.username != calendar_username:
             raise Exception('Change this to be more specific')
 
-        # helpers
-        date_format = '%Y-%m-%d'
-        str_to_date = lambda d, s: datetime.strptime(d, s).date()
 
         # getting user input
         calendar_name = self.request.get('calendarName')
@@ -37,10 +37,10 @@ class GenerateDatesHandler(BaseHandler):
         str_start_date = self.request.get('startDate')
 
         # converting user input
-        start_date = str_to_date(str_start_date, date_format)
+        start_date = str_to_date(str_start_date, DATE_FORMAT)
         vacation_date_pairs = map(lambda pair: \
                                   map(lambda d: \
-                                      str_to_date(d, date_format), \
+                                      str_to_date(d, DATE_FORMAT), \
                                       pair), \
                                   str_vacation_ranges)
 
@@ -54,7 +54,7 @@ class GenerateDatesHandler(BaseHandler):
         calendar_rows = map(lambda k: k.get(), calendar_row_keys)
         self.update_dates_and_add_rows(calendar_rows, session_dates, calendar, user)
 
-        self.response.out.write('wow!')
+        self.response.out.write('updated')
 
 
     def update_dates_and_add_rows(self, rows, dates, calendar, user):
@@ -122,11 +122,10 @@ class CalendarPageHandler(BaseHandler):
         values['user_owns_calendar'] = calendar.owner == user.key
 
         template = self.get_template()
-        self.response.write(template.render(values))
+        self.response.out.write(template.render(values))
 
 
-    def put(self, username, calendar_name):
-        text = self.request.get('text')
+    def put_text(self, text, username, calendar_name):
         url_safe_key = self.request.get('url_safe_key')
         key = ndb.Key(urlsafe=url_safe_key)
         cell = key.get()
@@ -134,6 +133,25 @@ class CalendarPageHandler(BaseHandler):
         cell.put()
         values = {'success': True}
         self.response.write(values)
+
+
+    def put_date(self, username, calendar_name, row_key, new_date):
+        row = row_key.get()
+        date_cell_key = row.date_cell
+        date_cell = date_cell_key.get()
+        date_cell.date = new_date
+        date_cell.put()
+        self.response.write('a little more')
+
+    def put(self, username, calendar_name):
+        if self.request.get('text'):
+            self.put_text(self.request.get('text'), username, calendar_name)
+        else:
+            row_key_url_safe = self.request.get('rowKey')
+            row_key = ndb.Key(urlsafe=row_key_url_safe)
+            new_date_str = self.request.get('date')
+            new_date = str_to_date(new_date_str, DATE_FORMAT)
+            self.put_date(username, calendar_name, row_key, new_date)
 
 
     def post(self, username, calendar_name):

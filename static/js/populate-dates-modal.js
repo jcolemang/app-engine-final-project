@@ -45,6 +45,68 @@
     };
 
 
+    pdmn.validateDate = function(dateStr) {
+        let parsedDate = /^(\d+)-(\d\d?)-(\d\d?)$/.exec(dateStr);
+
+        console.log(dateStr);
+        console.log(parsedDate);
+
+        if (!parsedDate) {
+            return false;
+        }
+
+        let month = +parsedDate[2];
+        let day = +parsedDate[3];
+        let year = +parsedDate[1];
+
+        if (day < 1)
+            return false;
+
+        switch (month) {
+        case 1:
+            if (day > 31) return false;
+            break;
+        case 2:
+            if (day > 28) return false;
+            break;
+        case 3:
+            if (day > 31) return false;
+            break;
+        case 4:
+            if (day > 30) return false;
+            break;
+        case 5:
+            if (day > 31) return false;
+            break;
+        case 6:
+            if (day > 30) return false;
+            break;
+        case 7:
+            if (day > 31) return false;
+            break;
+        case 8:
+            if (day > 31) return false;
+            break;
+        case 9:
+            if (day > 30) return false;
+            break;
+        case 10:
+            if (day > 31) return false;
+            break;
+        case 11:
+            if (day > 30) return false;
+            break;
+        case 12:
+            if (day > 31) return false;
+            break;
+        default:
+            return false;
+        }
+
+        return true;
+    };
+
+
     pdmn.checkNumDaysInput = function() {
 
         let numDays = $('#num-days-input').val();
@@ -60,7 +122,6 @@
     };
 
 
-
     // modal input bindings
 
 
@@ -74,8 +135,11 @@
     $('#add-vacation-range-button').click(function() {
         let vacationStart = $('#vacation-days-input-start').val();
         let vacationEnd = $('#vacation-days-input-end').val();
+        if (!pdmn.validateDate(vacationStart)) return false;
+        if (!pdmn.validateDate(vacationEnd)) return false;
         pdmn.addVacationRange(vacationStart, vacationEnd);
         pdmn.updateVacationRangeList();
+        return true;
     });
 
 
@@ -94,6 +158,8 @@
         }
 
         let startDate = $('#start-date-input').val();
+        let title = $('.page-title').html();
+        $('.page-title').html('Please wait...');
 
         $.ajax({
             url: '/generate-calendar',
@@ -115,6 +181,7 @@
             }
         });
 
+        $('#populate-dates-modal').modal('hide');
         return true;
     });
 

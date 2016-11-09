@@ -1,4 +1,4 @@
-from google.appengine.ext import ndb
+from google.appengine.ext import ndb, deferred
 import re
 from datetime import datetime
 
@@ -42,16 +42,14 @@ def insert_row(calendar, current_user, date):
     row = CalendarRow(parent=calendar.key)
     row.put()
 
-    cell_keys = []
     for i in range(len(calendar.column_names)):
         cell = Cell(parent=row.key)
         cell.put()
-        cell_keys.append(cell.key)
+        row.cell_keys.append(cell.key)
 
     date_cell = DateCell(parent=row.key, date=date)
     date_cell.put()
 
-    row.cell_keys = cell_keys
     row.date_cell = date_cell.key
     row.put()
     calendar.row_keys.append(row.key)
@@ -60,9 +58,9 @@ def insert_row(calendar, current_user, date):
 
 def delete_row(calendar, row_key):
     row = row_key.get()
-    row.date_cell.delete()
+    deferred.defer(row.date_cell.delete)
     for cell_key in row.cell_keys:
-        cell_key.delete()
+        deferred.defer(cell_key.delete)
     calendar.row_keys.remove(row_key)
     calendar.put()
     row_key.delete()
@@ -94,11 +92,8 @@ def delete_calendar(user, calendar_name):
         calendar = get_calendar(user, calendar_name)
     except DoesNotExistError:
         return False
+    ndb.delete_multi(ndb.Query(ancestor=calendar.key).iter(keys_only = True))
 
-    map(lambda row: delete_row(calendar, row.key),
-        map(lambda k: k.get(), calendar.row_keys))
-
-    calendar.key.delete()
     return True
 
 

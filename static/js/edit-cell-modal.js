@@ -114,7 +114,7 @@
     $('#markdown-input').keyup(ecns.respondToInput);
 
     // open the modal when a key is pressed
-    $('.calendar-cell.calendar-clickable').click(function() {
+    $('.calendar-cell.calendar-clickable.not-a-date').click(function() {
         let url_safe_key = $(this).attr('id');
         let clickedCell = $(this);
         let markdownText = clickedCell.find('.hidden-markdown-edits').html();
