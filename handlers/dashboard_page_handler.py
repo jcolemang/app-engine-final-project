@@ -6,8 +6,16 @@ from google.appengine.api import users
 from base_handler import BaseHandler
 from models import RepeatCalendarException
 
+# This normally shouldn't be checked into Git
+ROSEFIRE_SECRET = 'jRU1gHVFHmsVfo1XwEce'
+
+config = {}
+config["webapp2_extras.sessions"] = {
+    'secret_key': 'jRU1gHVFHmsVfo1XwEce'}
 
 class DashboardPageHandler(BaseHandler):
+  
+    
 
     template_name = 'dashboard-page/dashboard-page.html'
     valid_name_re = re.compile(r'^[a-zA-Z\-0-9_]+$$')
@@ -26,6 +34,7 @@ class DashboardPageHandler(BaseHandler):
 
     def handle_post(self, user):
         calendar_name = self.request.get('calendarName')
+        print "test"
         if not self.calendar_name_is_valid(calendar_name):
             self.redirect('/')
             return False
